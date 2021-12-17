@@ -6,6 +6,7 @@ import Rank  from './components/Rank/Rank';
 import Particles from "react-tsparticles";
 
 const particlesOptions = {
+  number:2000,
   fps_limit: 60,
   interactivity: {
     detect_on: "canvas",
@@ -81,6 +82,8 @@ const particlesOptions = {
   },
   retina_detect: true
 }
+
+
 function App() {
 
   const particlesInit = (main) => {
@@ -96,7 +99,7 @@ function App() {
   return (
 
     <div className="App">
-       <Particles  params={particlesOptions}/>
+       <Particles className="particles" params={particlesOptions}/>
      <Navigation />
      <Logo />
      <Rank />

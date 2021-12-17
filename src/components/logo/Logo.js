@@ -5,11 +5,11 @@ import brain from './brain.png'
 
 const Logo = () => {
     return (
-        <Tilty max={15}>
+        
         <div className='Tilt bw2 br2 ma4 mt0'>
                 <img className="Logo" src={brain} alt='logo'/>
         </div>
-        </Tilty>
+       
         // <div className="ma4 mt0" >
         // {/* <Tilty scale={1.2} max={25} perspective={1000}>
             
