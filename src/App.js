@@ -10,9 +10,9 @@ import Particles from "react-tsparticles";
 import {Component} from 'react';
 import Clarifai from 'clarifai';
 
-// const app = new Clarifai.App({
-//   apiKey: '6db181cd35e74f609d3956b56cb11f6f'
-//  });
+ const app = new Clarifai.App({
+   apiKey: process.env.CLARIFAI_API_KEY
+  });
 const particlesOptions = {
   number:2000,
   fps_limit: 60,
