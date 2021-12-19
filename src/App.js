@@ -9,11 +9,12 @@ import Register   from './components/Register/Register';
 import Particles from "react-tsparticles";
 import {Component} from 'react';
 import Clarifai from 'clarifai';
-
- const app = new Clarifai.App({
-   apiKey: process.env.CLARIFAI_API_KEY
-  });
-const particlesOptions = {
+//import dotenv from  'dotenv';
+console.log("bere",process.env.REACT_APP_CLARIFAI_API_KEY);
+//  const app = new Clarifai.App({
+//    apiKey: process.env.REACT_APP_CLARIFAI_API_KEY
+//   });
+ const particlesOptions = {
   number:2000,
   fps_limit: 60,
   interactivity: {
@@ -115,21 +116,16 @@ class App extends Component {
 
     if (route === 'signout') {
       this.setState({isSignedIn:false});
-      console.log("b here " , this.state.isSignedIn);
-
     }
     else if  (route === 'home') {
-
       this.setState({isSignedIn:true});
-      console.log("here " , this.state.isSignedIn);
     }
     this.setState({route:route});
-    console.log("onroutechange " , this.state.route);
-console.log(route);
-  // console.log(this.state.route)
   }
 
 render() {
+  const {isSignedIn, route} = this.state;
+
   const particlesInit = (main) => {
     console.log(main);
 
@@ -146,14 +142,14 @@ render() {
 
     <div className="App">
        <Particles className="particles" params={particlesOptions}/>
-     <Navigation  isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
-      { this.state.route === 'home' ? 
+     <Navigation  isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
+      { route === 'home' ? 
       <div>
       <Logo />
        <Rank />
        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
      </div>
-     : (this.state.route === 'signin')
+     : (route === 'signin')
       ?
      <SignIn onRouteChange={this.onRouteChange} />
      : 
