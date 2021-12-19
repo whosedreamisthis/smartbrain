@@ -9,8 +9,7 @@ import Register   from './components/Register/Register';
 import Particles from "react-tsparticles";
 import {Component} from 'react';
 import Clarifai from 'clarifai';
-//import dotenv from  'dotenv';
-console.log("bere",process.env.REACT_APP_CLARIFAI_API_KEY);
+//import dotenv from  'dotenv';y
 //  const app = new Clarifai.App({
 //    apiKey: process.env.REACT_APP_CLARIFAI_API_KEY
 //   });
