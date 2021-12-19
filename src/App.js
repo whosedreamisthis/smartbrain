@@ -3,8 +3,15 @@ import Navigation  from './components/Navigation/Navigation';
 import Logo  from './components/Logo/Logo';
 import ImageLinkForm  from './components/imagelinkform/ImageLinkForm';
 import Rank  from './components/Rank/Rank';
-import Particles from "react-tsparticles";
+import SignIn   from './components/SignIn/SignIn';
 
+import Particles from "react-tsparticles";
+import {Component} from 'react';
+import Clarifai from 'clarifai';
+
+// const app = new Clarifai.App({
+//   apiKey: '6db181cd35e74f609d3956b56cb11f6f'
+//  });
 const particlesOptions = {
   number:2000,
   fps_limit: 60,
@@ -84,8 +91,30 @@ const particlesOptions = {
 }
 
 
-function App() {
+class App extends Component {
+  constructor () {
+    super();
+    this.state = {
+      input: '',
+      route: 'signin'
+    }
+  }
 
+  onInputChange = (event) => {
+    console.log(event.target.value);
+  }
+
+  onButtonSubmit = () => {
+    console.log("click");
+    
+  }
+
+  onRouteChange = (route) => {
+    this.setState({route:route});
+  // console.log(this.state.route)
+  }
+
+render() {
   const particlesInit = (main) => {
     console.log(main);
 
@@ -96,19 +125,25 @@ function App() {
     console.log(container);
   };
 
+  
+
   return (
 
     <div className="App">
        <Particles className="particles" params={particlesOptions}/>
-     <Navigation />
-     <Logo />
-     <Rank />
-
-     <ImageLinkForm />
-   {/*  
-     <FaceRecoognition />} */}
+     <Navigation onRouteChange={this.onRouteChange}/>
+      { this.state.route === 'signin' ? 
+     <SignIn onRouteChange={this.onRouteChange} />
+     : <div>
+       <Logo />
+        <Rank />
+        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
+      </div>
+      }
+  
     </div>
   );
+}
 }
 
 export default App;
