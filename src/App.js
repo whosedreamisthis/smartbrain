@@ -4,6 +4,7 @@ import Logo  from './components/Logo/Logo';
 import ImageLinkForm  from './components/imagelinkform/ImageLinkForm';
 import Rank  from './components/Rank/Rank';
 import SignIn   from './components/SignIn/SignIn';
+import Register   from './components/Register/Register';
 
 import Particles from "react-tsparticles";
 import {Component} from 'react';
@@ -96,7 +97,8 @@ class App extends Component {
     super();
     this.state = {
       input: '',
-      route: 'signin'
+      route: 'signin',
+      isSignedIn: false
     }
   }
 
@@ -110,7 +112,20 @@ class App extends Component {
   }
 
   onRouteChange = (route) => {
+
+    if (route === 'signout') {
+      this.setState({isSignedIn:false});
+      console.log("b here " , this.state.isSignedIn);
+
+    }
+    else if  (route === 'home') {
+
+      this.setState({isSignedIn:true});
+      console.log("here " , this.state.isSignedIn);
+    }
     this.setState({route:route});
+    console.log("onroutechange " , this.state.route);
+console.log(route);
   // console.log(this.state.route)
   }
 
@@ -131,15 +146,19 @@ render() {
 
     <div className="App">
        <Particles className="particles" params={particlesOptions}/>
-     <Navigation onRouteChange={this.onRouteChange}/>
-      { this.state.route === 'signin' ? 
+     <Navigation  isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+      { this.state.route === 'home' ? 
+      <div>
+      <Logo />
+       <Rank />
+       <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
+     </div>
+     : (this.state.route === 'signin')
+      ?
      <SignIn onRouteChange={this.onRouteChange} />
-     : <div>
-       <Logo />
-        <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-      </div>
-      }
+     : 
+     <Register onRouteChange={this.onRouteChange} />
+    }
   
     </div>
   );
