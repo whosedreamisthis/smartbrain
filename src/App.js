@@ -98,16 +98,42 @@ class App extends Component {
     this.state = {
       input: '',
       route: 'signin',
-      isSignedIn: false
+      isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email:'',
+        entries: 0,
+        joined: ''
+      }
     }
   }
 
+
+  loadUser = (data) => {
+    this.setState( {user:{
+      id: data.id,
+      name: data.name,
+      email:data.email,
+      entries: data.entries,
+      joined: data.joined
+    }})
+  }
   onInputChange = (event) => {
     console.log(event.target.value);
   }
 
   onButtonSubmit = () => {
     console.log("click");
+    fetch("http://localhost:3000/image",{
+      method: 'put',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        id: this.state.user.id      })
+    }).then(response => response.json())
+    .then(count => {
+      this.setState(Object.assign(this.state.user,{entries:count}));
+    });
     
   }
 
@@ -123,8 +149,8 @@ class App extends Component {
   }
 
 render() {
-  const {isSignedIn, route} = this.state;
-
+  const {isSignedIn, route,user} = this.state;
+  console.log(user);
   const particlesInit = (main) => {
     console.log(main);
 
@@ -145,14 +171,14 @@ render() {
       { route === 'home' ? 
       <div>
       <Logo />
-       <Rank />
+       <Rank entries={user.entries} name={user.name} />
        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
      </div>
      : (route === 'signin')
       ?
-     <SignIn onRouteChange={this.onRouteChange} />
+     <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
      : 
-     <Register onRouteChange={this.onRouteChange} />
+     <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
     }
   
     </div>
