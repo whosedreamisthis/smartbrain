@@ -24,7 +24,9 @@ class SignIn extends React.Component  {
         this.props.loadUser(user);
         this.props.onRouteChange('home');
       }
-    })
+    }).catch(err =>{
+      console.log("sign in failed.");
+     })
   }
   onEmailChange = (event) => {
       this.setState({signInEmail:event.target.value})

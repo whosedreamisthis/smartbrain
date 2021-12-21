@@ -8,7 +8,11 @@ import Register   from './components/Register/Register';
 
 import Particles from "react-tsparticles";
 import {Component} from 'react';
-import Clarifai from 'clarifai';
+const Clarifai = require( 'clarifai');
+//import dotenv from  'dotenv';y
+  // const appClarifai = new Clarifai.App({
+  //   apiKey: '6db181cd35e74f609d3956b56cb11f6f'
+  //  });
 //import dotenv from  'dotenv';y
 //  const app = new Clarifai.App({
 //    apiKey: process.env.REACT_APP_CLARIFAI_API_KEY
@@ -91,12 +95,8 @@ import Clarifai from 'clarifai';
   retina_detect: true
 }
 
-
-class App extends Component {
-  constructor () {
-    super();
-    this.state = {
-      input: '',
+const initialState = {
+  input: '',
       route: 'signin',
       isSignedIn: false,
       user: {
@@ -106,7 +106,11 @@ class App extends Component {
         entries: 0,
         joined: ''
       }
-    }
+}
+class App extends Component {
+  constructor () {
+    super();
+    this.state = initialState;
   }
 
 
@@ -133,14 +137,16 @@ class App extends Component {
     }).then(response => response.json())
     .then(count => {
       this.setState(Object.assign(this.state.user,{entries:count}));
-    });
+    }).catch(err =>{
+     console.log(" image submission failed.");
+    })
     
   }
 
   onRouteChange = (route) => {
 
     if (route === 'signout') {
-      this.setState({isSignedIn:false});
+      this.setState(initialState);
     }
     else if  (route === 'home') {
       this.setState({isSignedIn:true});
