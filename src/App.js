@@ -118,7 +118,6 @@ class App extends Component {
     }})
   }
   onInputChange = (event) => {
-    console.log(event.target.value);
     this.setState({input:event.target.value});
   }
   calculateFaceLocation = (data) => {
@@ -135,7 +134,6 @@ class App extends Component {
   }
 
   displayFaceBox = (box) => {
-    console.log(box)
     this.setState({box: box});
   }
 
@@ -183,7 +181,6 @@ class App extends Component {
 
 render() {
   const {isSignedIn, route,user, imageUrl} = this.state;
-  console.log(user);
   const particlesInit = (main) => {
     console.log(main);
 
