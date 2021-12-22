@@ -139,7 +139,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-      fetch('http://localhost:3000/imageurl', {
+      fetch('https://secret-savannah-70067.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -149,7 +149,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://secret-savannah-70067.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -203,7 +203,9 @@ render() {
       <Logo />
        <Rank entries={user.entries} name={user.name} />
        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-      <FaceRecognition box={this.state.box} imageUrl={imageUrl} />
+      if (this.state.box) {
+        <FaceRecognition box={this.state.box} imageUrl={imageUrl} />
+      }
      </div>
      : (route === 'signin')
       ?
