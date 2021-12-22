@@ -7,7 +7,7 @@ const Navigation = ({onRouteChange, isSignedIn}) => {
             <a onClick={()=>onRouteChange('signin')} href="#" className='f3 link black underline-hover dim pa3 pointer' >Sign Out</a> 
             </nav>);
             }
-            
+             
                 return ( 
                     <nav style={{display:'flex',justifyContent:'flex-end'}}>
             <a onClick={()=>onRouteChange('signin')} href="#" className='f5 link black underline-hover dim pa3 pointer' >Sign In</a> 
