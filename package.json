@@ -29,7 +29,7 @@
     "deploy": "gh-pages -d build",
     "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts t",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
