@@ -203,9 +203,9 @@ render() {
       <Logo />
        <Rank entries={user.entries} name={user.name} />
        <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-      if (this.state.box) {
+      
         <FaceRecognition box={this.state.box} imageUrl={imageUrl} />
-      }
+      
      </div>
      : (route === 'signin')
       ?
